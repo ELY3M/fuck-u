@@ -21,6 +21,10 @@ int main(int argc, char **argv)
 
     consoleInit(NULL);
 	setInitialize();
+	
+    padConfigureInput(1, HidNpadStyleSet_NpadStandard);
+    PadState pad;
+    padInitializeDefault(&pad);
 
 
     printf("Heres a handy guide!\n");
@@ -36,46 +40,83 @@ int main(int argc, char **argv)
 	while(appletMainLoop())
     {
         //Scan all the inputs. This should be done once for each frame
-        hidScanInput();
-        //hidKeysDown returns information about which buttons have been just pressed (and they weren't in the previous frame)
-        u64 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
+
+        padUpdate(&pad);
+        u64 kDown = padGetButtonsDown(&pad);
+
 		
-		if(kDown & KEY_ZL)
+/*
+
+
+
+    HidNpadButton_A             = BITL(0),  ///< A button / Right face button
+    HidNpadButton_B             = BITL(1),  ///< B button / Down face button
+    HidNpadButton_X             = BITL(2),  ///< X button / Up face button
+    HidNpadButton_Y             = BITL(3),  ///< Y button / Left face button
+    HidNpadButton_StickL        = BITL(4),  ///< Left Stick button
+    HidNpadButton_StickR        = BITL(5),  ///< Right Stick button
+    HidNpadButton_L             = BITL(6),  ///< L button
+    HidNpadButton_R             = BITL(7),  ///< R button
+    HidNpadButton_ZL            = BITL(8),  ///< ZL button
+    HidNpadButton_ZR            = BITL(9),  ///< ZR button
+    HidNpadButton_Plus          = BITL(10), ///< Plus button
+    HidNpadButton_Minus         = BITL(11), ///< Minus button
+    HidNpadButton_Left          = BITL(12), ///< D-Pad Left button
+    HidNpadButton_Up            = BITL(13), ///< D-Pad Up button
+    HidNpadButton_Right         = BITL(14), ///< D-Pad Right button
+    HidNpadButton_Down          = BITL(15), ///< D-Pad Down button
+    HidNpadButton_StickLLeft    = BITL(16), ///< Left Stick pseudo-button when moved Left
+    HidNpadButton_StickLUp      = BITL(17), ///< Left Stick pseudo-button when moved Up
+    HidNpadButton_StickLRight   = BITL(18), ///< Left Stick pseudo-button when moved Right
+    HidNpadButton_StickLDown    = BITL(19), ///< Left Stick pseudo-button when moved Down
+    HidNpadButton_StickRLeft    = BITL(20), ///< Right Stick pseudo-button when moved Left
+    HidNpadButton_StickRUp      = BITL(21), ///< Right Stick pseudo-button when moved Up
+    HidNpadButton_StickRRight   = BITL(22), ///< Right Stick pseudo-button when moved Right
+    HidNpadButton_StickRDown    = BITL(23), ///< Right Stick pseudo-button when moved Left
+    HidNpadButton_LeftSL        = BITL(24), ///< SL button on Left Joy-Con
+    HidNpadButton_LeftSR        = BITL(25), ///< SR button on Left Joy-Con
+    HidNpadButton_RightSL       = BITL(26), ///< SL button on Right Joy-Con
+    HidNpadButton_RightSR       = BITL(27), ///< SR button on Right Joy-Con
+	
+*/		
+		
+		
+		if(kDown & HidNpadButton_ZL)
 		{
 			printf(" HAHAHAHAHAHA.");
 		}
 		
-		if(kDown & KEY_ZR)
+		if(kDown & HidNpadButton_ZR)
 		{
 			printf(" LOL.");
 		}
 		
-		if(kDown & KEY_R)
+		if(kDown & HidNpadButton_R)
 		{
 			printf(" Suck me.");
 		}
 		
-		if(kDown & KEY_L)
+		if(kDown & HidNpadButton_L)
 		{
 			printf(" Suck my cock.");
 		}
 		
-		if(kDown & KEY_B)
+		if(kDown & HidNpadButton_B)
 		{
 			printf(" Bitch.");
 		}
 
-		if(kDown & KEY_X)
+		if(kDown & HidNpadButton_X)
 		{
 			printf(" Shut up.");
 		}
 		
-		if(kDown & KEY_Y)
+		if(kDown & HidNpadButton_Y)
 		{
 		printf(" Cunt");
 		}
 		
-		if(kDown & KEY_LSTICK) 
+		if(kDown & HidNpadButton_StickL) 
 		{
 		printf("\n\n\n"); 	
 		printf("\t   _/~\\_\n");
@@ -95,7 +136,7 @@ int main(int argc, char **argv)
 
 		}
 
-		if(kDown & KEY_LSTICK_UP) 
+		if(kDown & HidNpadButton_StickLUp) 
 		{
 		printf("\n\n");		
 		printf("\t         /\"\\ \n");
@@ -125,18 +166,21 @@ int main(int argc, char **argv)
 				
 		
 
-		if(kDown & KEY_MINUS)
+		if(kDown & HidNpadButton_Minus)
 		{
 		consoleClear();
 
 		}
 		
-		if(kDown & KEY_A)
+		
+		if(kDown & HidNpadButton_A)
 		{
 			printf(" Fuck You");
 		}
 		
-        if (kDown & KEY_PLUS) break; // break in order to return to hbmenu
+		
+		
+        if (kDown & HidNpadButton_Plus) break; // break in order to return to hbmenu
 		
 		consoleUpdate(NULL);
 		
