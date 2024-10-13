@@ -24,3 +24,12 @@ jobs:
       - name: test
         run: ls -la
         
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.run_number }}
+          prerelease: false
+          draft: false
+          body: ${{ github.event.head_commit.message }}
+          files: fuck-u.nro
+          name: "Switch Release #"${{ github.run_number }}
