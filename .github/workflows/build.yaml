@@ -32,4 +32,4 @@ jobs:
           draft: false
           body: ${{ github.event.head_commit.message }}
           files: fuck-u.nro
-          name: "Switch Release #"${{ github.run_number }}
+          name: ${{ github.run_number }}
