@@ -1,4 +1,4 @@
-name: Build libnx
+name: Build
 
 on:
   push:
